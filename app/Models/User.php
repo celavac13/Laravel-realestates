@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Realestate::class);
     }
+
+    public function favouritesRealestate()
+    {
+        return $this->belongsToMany(Realestates::class);
+    }
 }

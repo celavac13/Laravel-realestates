@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Realestate;
 use Illuminate\Http\Request;
 
 class FavouritesController extends Controller
@@ -11,11 +12,13 @@ class FavouritesController extends Controller
         return view('realestates.index');
     }
 
-    public function addToFavourites()
+    public function addToFavourites(Realestate $realestate, Request $request)
     {
+        dd($realestate);
     }
 
-    public function removeFromFavourites()
+    public function removeFromFavourites(Realestate $realestate, Request $request)
     {
+        dd($request);
     }
 }

@@ -31,4 +31,9 @@ class Realestate extends Model
     {
         $this->belongsTo(City::class);
     }
+
+    public function favouritedBy()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

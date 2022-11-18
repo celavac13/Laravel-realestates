@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Realestate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RealestateController extends Controller
 {
@@ -34,9 +35,21 @@ class RealestateController extends Controller
             'city_id' => $request->city,
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $request->file('image')->store('images')
+            'image' => $request->file('image')->store('images', 'public')
         ]);
 
         return redirect()->route('home');
+    }
+
+    public function show(Realestate $realestate)
+    {
+
+        $cities = DB::table('realestates')->selectRaw('city_id as id, count(*) as total, cities.name')->join('cities', 'cities.id', '=', 'realestates.city_id')->groupBy('city_id')->get();
+
+        return view('realestates.single', [
+            'realestate' => $realestate,
+            'cities' => $cities,
+            'isFavourite' => true
+        ]);
     }
 }

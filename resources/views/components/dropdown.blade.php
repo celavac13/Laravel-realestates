@@ -1,4 +1,4 @@
-@props(['cities', 'totalInCity'])
+@props(['cities'])
 <div class="flex align-center justify-center">
     <button id="dropdownDefault" data-dropdown-toggle="dropdown"
         class="text-gray-700 bg-orange-500 hover:bg-orange-600 hover:text-gray-900 rounded-md text-sm px-4 py-2.5 mt-2 text-center inline-flex items-center"
@@ -16,9 +16,9 @@
             </li>
             @foreach ($cities as $city)
                 <li>
-                    <a href="{{ route('city') }}?city={{ $city->id }}"
+                    <a href="{{ route('city', $city->id) }}"
                         class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $city->name }}
-                        {{ $totalInCity($city->id) }}</a>
+                        {{ $city->total }}</a>
                 </li>
             @endforeach
 

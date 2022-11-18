@@ -20,9 +20,13 @@ Route::post('/login', [LoginController::class, 'store']);
 
 Route::get('/logout', [LogoutController::class, 'store'])->name('logout');
 
-Route::get('/add-realestate', [RealestateController::class, 'index'])->name('addRealestate');
-Route::post('/add-realestate', [RealestateController::class, 'store']);
+Route::get('/realestate/create', [RealestateController::class, 'index'])->name('addRealestate');
+Route::post('/realestate/create', [RealestateController::class, 'store']);
+Route::get('/realestates/{realestate}', [RealestateController::class, 'show'])->name('single');
 
-Route::get('/city', [CityController::class, 'index'])->name('city');
+Route::get('/realestates/favourites/add{user}{realestate}', [FavouritesController::class, 'addToFavourites'])->name('addFavourites');
+Route::get('/realestates/favourites/remove{user}{realestate}', [FavouritesController::class, 'removeFromFavourites'])->name('removeFavourites');
+
+Route::get('/city/{city}', [CityController::class, 'index'])->name('city');
 
 Route::get('/favourites', [FavouritesController::class, 'index'])->name('favourites');

@@ -1,6 +1,6 @@
 <x-layout>
     <x-navBar />
-    <x-dropdown :cities="$cities" :totalInCity="$totalInCity" />
+    <x-dropdown :cities="$cities" />
     <div class="lg:grid lg:grid-cols-6">
         @foreach ($realestates as $realestate)
             <x-realestate :realestate="$realestate" />

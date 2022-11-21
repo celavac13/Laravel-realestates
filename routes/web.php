@@ -24,8 +24,9 @@ Route::get('/realestate/create', [RealestateController::class, 'index'])->name('
 Route::post('/realestate/create', [RealestateController::class, 'store']);
 Route::get('/realestates/{realestate}', [RealestateController::class, 'show'])->name('single');
 
-Route::get('/realestates/favourites/add{user}{realestate}', [FavouritesController::class, 'addToFavourites'])->name('addFavourites');
-Route::get('/realestates/favourites/remove{user}{realestate}', [FavouritesController::class, 'removeFromFavourites'])->name('removeFavourites');
+//izmeni rutu u jsu i promeni na post metodu
+Route::post('/realestates/{realestate}/favourites', [FavouritesController::class, 'store'])->name('addFavourites');
+Route::delete('/realestates/{realestate}/favourites', [FavouritesController::class, 'destroy'])->name('removeFavourites');
 
 Route::get('/city/{city}', [CityController::class, 'index'])->name('city');
 

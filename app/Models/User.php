@@ -50,6 +50,6 @@ class User extends Authenticatable
 
     public function favouritesRealestate()
     {
-        return $this->belongsToMany(Realestates::class);
+        return $this->belongsToMany(Realestate::class, 'favourites');
     }
 }

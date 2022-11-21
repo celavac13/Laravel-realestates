@@ -34,6 +34,6 @@ class Realestate extends Model
 
     public function favouritedBy()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'favourites');
     }
 }

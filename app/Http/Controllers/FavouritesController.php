@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Realestate;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FavouritesController extends Controller
@@ -12,13 +13,26 @@ class FavouritesController extends Controller
         return view('realestates.index');
     }
 
-    public function addToFavourites(Realestate $realestate, Request $request)
+
+    public function store(Realestate $realestate)
     {
-        dd($realestate);
+        /** @var User $user */
+        $user = auth()->user();
+        $user->favouritesRealestate()->attach($realestate);
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Added to favourites',
+        ]);
     }
 
-    public function removeFromFavourites(Realestate $realestate, Request $request)
+    public function destroy(Realestate $realestate)
     {
-        dd($request);
+        /** @var User $user */
+        $user = auth()->user();
+        $user->favouritesRealestate()->detach($realestate);
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Removed from favourites',
+        ]);
     }
 }

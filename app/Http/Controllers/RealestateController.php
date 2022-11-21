@@ -11,7 +11,7 @@ class RealestateController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only('store');
     }
 
     public function index()
@@ -45,11 +45,12 @@ class RealestateController extends Controller
     {
 
         $cities = DB::table('realestates')->selectRaw('city_id as id, count(*) as total, cities.name')->join('cities', 'cities.id', '=', 'realestates.city_id')->groupBy('city_id')->get();
+        $isFavourite = !$realestate->favouritedBy->isEmpty();
 
         return view('realestates.single', [
             'realestate' => $realestate,
             'cities' => $cities,
-            'isFavourite' => true
+            'isFavourite' => $isFavourite
         ]);
     }
 }

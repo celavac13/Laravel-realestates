@@ -4,12 +4,11 @@
     @auth
         <div class="flex items-start">
             <div class="p-6 col-span-2">
-                <input type="hidden" id="userId" data-value="{{ auth()->user()->id }}" />
-                <input type="hidden" id="realestateId" data-value="{{ $realestate->id }}" />
                 <p class="text-xl">{{ $realestate->title }}</p>
                 <img src="{{ asset('storage/' . $realestate->image) }}" alt="">
                 <p class="text-md">{{ $realestate->description }}</p>
-                <i class="fa fa-heart {{ $isFavourite ? 'liked' : '' }}" id="likeBtn" style="font-size:48px;"></i>
+                <i class="fa fa-heart {{ $isFavourite ? 'liked' : '' }}" id="likeBtn" style="font-size:48px;"
+                    data-realestate="{{ $realestate->id }}"></i>
                 <p class="text-md" id="successMsg"></p>
             </div>
         </div>

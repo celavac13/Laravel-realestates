@@ -13,7 +13,7 @@
             </div>
         </div>
         @if (auth()->user()->id === $realestate->user_id)
-            <a href="/realestate/edit?={{ $realestate->id }}"
+            <a href="{{ route('edit', $realestate) }}"
                 class="text-blue-500 text-xl ml-10 mt-10 hover:text-blue-800">Edit</a>
         @endif
     @endauth

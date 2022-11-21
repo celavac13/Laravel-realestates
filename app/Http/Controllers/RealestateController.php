@@ -53,4 +53,36 @@ class RealestateController extends Controller
             'isFavourite' => $isFavourite
         ]);
     }
+
+    public function update(Realestate $realestate)
+    {
+        if (auth()->user()->id !== $realestate->user_id) {
+            return redirect()->route('home');
+        } else {
+            $cities = DB::table('realestates')->selectRaw('city_id as id, count(*) as total, cities.name')->join('cities', 'cities.id', '=', 'realestates.city_id')->groupBy('city_id')->get();
+
+            return view('realestates.edit', [
+                'realestate' => $realestate,
+                'cities' => $cities
+            ]);
+        }
+    }
+
+    public function edit(Realestate $realestate, Request $request)
+    {
+        $this->validate($request, [
+            'city' => 'required',
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+
+        $realestate->update([
+            'city_id' => $request->city,
+            'title' => $request->title,
+            'description' => $request->description
+
+        ]);
+
+        return redirect()->route('home');
+    }
 }

@@ -1,6 +1,6 @@
 <x-layout>
     <x-navBar />
-    <x-dropdown :cities="$cities" />
+    <x-dropdown />
     @auth
         <div class="flex items-start">
             <div class="p-6 col-span-2">

@@ -43,13 +43,10 @@ class RealestateController extends Controller
 
     public function show(Realestate $realestate)
     {
-
-        $cities = DB::table('realestates')->selectRaw('city_id as id, count(*) as total, cities.name')->join('cities', 'cities.id', '=', 'realestates.city_id')->groupBy('city_id')->get();
         $isFavourite = !$realestate->favouritedBy->isEmpty();
 
         return view('realestates.single', [
             'realestate' => $realestate,
-            'cities' => $cities,
             'isFavourite' => $isFavourite
         ]);
     }
@@ -59,8 +56,7 @@ class RealestateController extends Controller
         if (auth()->user()->id !== $realestate->user_id) {
             return redirect()->route('home');
         } else {
-            $cities = DB::table('realestates')->selectRaw('city_id as id, count(*) as total, cities.name')->join('cities', 'cities.id', '=', 'realestates.city_id')->groupBy('city_id')->get();
-
+            $cities = City::get();
             return view('realestates.edit', [
                 'realestate' => $realestate,
                 'cities' => $cities
